@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>📚 Editar Livro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">📚 Biblioteca</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lista_livros'%}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'adicionar_livro' %}">Adicionar Livro</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    <h2 class="mb-4">Editar Livro</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" name="titulo" class="form-control" value="{{ livro.titulo }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Autor</label>
+            <select name="autor" class="form-select" required>
+                {% for autor in autores %}
+                    <option value="{{ autor.id }}" {% if livro.autor.id == autor.id %}selected{% endif %}>{{ autor.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Categoria</label>
+            <select name="categoria" class="form-select">
+                {% for cat in categorias %}
+                    <option value="{{ cat.id }}" {% if livro.categoria.id == cat.id %}selected{% endif %}>{{ cat.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea name="descricao" rows="4" class="form-control">{{ livro.descricao }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Imagem</label>
+            <input type="file" name="imagem" class="form-control">
+            {% if livro.imagem %}
+                <img src="{{ livro.imagem.url }}" width="150" class="mt-2">
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar Alterações</button>
+        <a href="{% url 'lista_livros' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
