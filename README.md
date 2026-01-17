@@ -27,35 +27,6 @@ O sistema permite cadastrar livros com autor, categoria, descrição e imagem, u
 
 ---
 
-## 📂 Estrutura do projeto
-
-project1/
-│
-├── project1/
-│ ├── settings.py
-│ ├── urls.py
-│
-├── livros/
-│ ├── models.py
-│ ├── views.py
-│ ├── urls.py
-│ ├── templates/
-│ │ └── Livro/
-│ │ ├── listar.html
-│ │ ├── adicionar.html
-│ │ ├── editar.html
-│ │ └── deletar_livro.html
-│
-├── media/
-│ └── livros/
-│
-├── static/
-├── db.sqlite3
-└── manage.py
-
-
----
-
 ## ⚙️ Como rodar o projeto
 
 ### 1️⃣ Clonar o repositório
